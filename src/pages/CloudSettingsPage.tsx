@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Input } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
 import { LoadingSpinner } from '@/components/ui/EmptyState';
+import { GoogleDriveLogo, DropboxLogo, OneDriveLogo } from '@/components/ui/CloudLogos';
 import { formatDate } from '@/utils/formatters';
 import { useTranslation } from '@/i18n';
 
@@ -47,12 +48,31 @@ export function CloudSettingsPage() {
     loadState();
   }, [loadState]);
 
+  const [configProvider, setConfigProvider] = useState<string>('');
+
   const handleConnect = async (providerName: string) => {
-    // Check if client ID is configured for Google Drive
+    // Check if credentials are configured
     if (providerName === 'google-drive') {
-      const envId = import.meta.env?.VITE_GOOGLE_CLIENT_ID;
+      const envId = (import.meta as any).env?.VITE_GOOGLE_CLIENT_ID;
       const storedId = localStorage.getItem('SHgestions_google_client_id');
       if (!envId && !storedId) {
+        setConfigProvider('google-drive');
+        setShowClientIdModal(true);
+        return;
+      }
+    } else if (providerName === 'dropbox') {
+      const envKey = (import.meta as any).env?.VITE_DROPBOX_APP_KEY;
+      const storedKey = localStorage.getItem('SHgestions_dropbox_app_key');
+      if (!envKey && !storedKey) {
+        setConfigProvider('dropbox');
+        setShowClientIdModal(true);
+        return;
+      }
+    } else if (providerName === 'onedrive') {
+      const envId = (import.meta as any).env?.VITE_ONEDRIVE_CLIENT_ID;
+      const storedId = localStorage.getItem('SHgestions_onedrive_client_id');
+      if (!envId && !storedId) {
+        setConfigProvider('onedrive');
         setShowClientIdModal(true);
         return;
       }
@@ -116,8 +136,14 @@ export function CloudSettingsPage() {
 
   const handleSaveClientId = () => {
     if (clientId.trim()) {
-      localStorage.setItem('SHgestions_google_client_id', clientId.trim());
+      const keyMap: Record<string, string> = {
+        'google-drive': 'SHgestions_google_client_id',
+        'dropbox': 'SHgestions_dropbox_app_key',
+        'onedrive': 'SHgestions_onedrive_client_id',
+      };
+      localStorage.setItem(keyMap[configProvider] || keyMap['google-drive'], clientId.trim());
       setShowClientIdModal(false);
+      setClientId('');
       addToast('success', t('clientIdSaved'));
     }
   };
@@ -145,7 +171,7 @@ export function CloudSettingsPage() {
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center">
-                <span className="text-lg">🔵</span>
+                {connection?.provider === "google-drive" ? <GoogleDriveLogo size={28} /> : connection?.provider === "dropbox" ? <DropboxLogo size={28} /> : <OneDriveLogo size={28} />}
               </div>
               <div>
                 <p className="text-sm font-semibold text-surface-900 dark:text-surface-100">
@@ -162,7 +188,7 @@ export function CloudSettingsPage() {
 
             {connection.lastSyncAt && (
               <p className="text-xs text-surface-400">
-                Última sincronització: {new Date(connection.lastSyncAt).toLocaleString('ca-ES')}
+                {t('cloudLastSync')}: {new Date(connection.lastSyncAt).toLocaleString()}
               </p>
             )}
 
@@ -201,13 +227,13 @@ export function CloudSettingsPage() {
             <Card key={provider.name} className="p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{provider.icon}</span>
+                  {provider.name === "google-drive" ? <GoogleDriveLogo size={32} /> : provider.name === "dropbox" ? <DropboxLogo size={32} /> : <OneDriveLogo size={32} />}
                   <div>
                     <p className="text-sm font-semibold text-surface-900 dark:text-surface-100">
                       {provider.displayName}
                     </p>
                     <p className="text-xs text-surface-400">
-                      {provider.available ? 'Disponible' : 'Properament'}
+                      {provider.available ? t('cloudAvailable') : t('comingSoon')}
                     </p>
                   </div>
                 </div>
@@ -254,7 +280,7 @@ export function CloudSettingsPage() {
 
           {stats.lastSyncAt && (
             <p className="text-xs text-surface-400 text-center mt-3">
-              Última: {new Date(stats.lastSyncAt).toLocaleString('ca-ES')}
+              {t('cloudLastSync')}: {new Date(stats.lastSyncAt).toLocaleString()}
             </p>
           )}
 
@@ -299,10 +325,10 @@ export function CloudSettingsPage() {
           </div>
 
           <Input
-            label="Google Client ID"
+            label={configProvider === 'dropbox' ? 'Dropbox App Key' : configProvider === 'onedrive' ? 'OneDrive Client ID' : 'Google Client ID'}
             value={clientId}
             onChange={e => setClientId(e.target.value)}
-            placeholder="xxxxxxxxxxxx.apps.googleusercontent.com"
+            placeholder={configProvider === 'dropbox' ? 'xxxxxxxxxxxx' : configProvider === 'onedrive' ? 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' : 'xxxxxxxxxxxx.apps.googleusercontent.com'}
             hint="El trobaràs a Google Cloud Console → Credencials"
           />
 
@@ -321,7 +347,7 @@ export function CloudSettingsPage() {
       <Modal
         isOpen={showErrorsModal}
         onClose={() => setShowErrorsModal(false)}
-        title="Errors de sincronització"
+        title={t('cloudSyncErrorsTitle')}
         maxWidth="max-w-md"
       >
         <div className="space-y-2 max-h-60 overflow-y-auto">

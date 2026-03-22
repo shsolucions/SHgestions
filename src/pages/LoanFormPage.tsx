@@ -97,7 +97,7 @@ export function LoanFormPage() {
     }
   };
 
-  if (loading) return <LoadingSpinner text="Carregant préstec…" />;
+  if (loading) return <LoadingSpinner text={t('loadingLoan')} />;
 
   return (
     <div className="animate-fade-in space-y-5">
@@ -107,30 +107,30 @@ export function LoanFormPage() {
 
       <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 space-y-4">
         <Input
-          label="Nom del préstec"
+          label={t('formLoanName')}
           value={name}
           onChange={e => setName(e.target.value)}
-          placeholder="p.ex. PRÉSTEC PERSONAL"
+          placeholder={t('formLoanNamePlaceholder')}
         />
 
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label={t("lender")}
+            label={t('formLender')}
             value={lenderName}
             onChange={e => setLenderName(e.target.value)}
-            placeholder="Nom del prestador"
+            placeholder={t('formLenderPlaceholder')}
           />
           <Input
-            label={t("borrower")}
+            label={t('formBorrower')}
             value={borrowerName}
             onChange={e => setBorrowerName(e.target.value)}
-            placeholder="Nom del prestatari"
+            placeholder={t('formBorrowerPlaceholder')}
           />
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label={t("lentAmount")}
+            label={t('formAmount')}
             type="number"
             inputMode="decimal"
             step="0.01"
@@ -139,7 +139,7 @@ export function LoanFormPage() {
             onChange={e => setPrincipalAmount(e.target.value)}
           />
           <Select
-            label={t("currency")}
+            label={t('formCurrency')}
             value={currency}
             onChange={e => setCurrency(e.target.value)}
             options={[
@@ -151,7 +151,7 @@ export function LoanFormPage() {
         </div>
 
         <Input
-          label={t('startDate')}
+          label={t('formStartDate')}
           type="date"
           value={startDate}
           onChange={e => setStartDate(e.target.value)}
@@ -163,18 +163,18 @@ export function LoanFormPage() {
             value={status}
             onChange={e => setStatus(e.target.value as LoanStatus)}
             options={[
-              { value: 'actiu', label: 'Actiu' },
-              { value: 'pausat', label: 'Pausat' },
-              { value: 'finalitzat', label: 'Finalitzat' },
+              { value: 'actiu', label: t('statusActive') },
+              { value: 'pausat', label: t('statusPaused') },
+              { value: 'finalitzat', label: t('statusFinished') },
             ]}
           />
         )}
 
         <TextArea
-          label={`${t("notes")} (${t("optional")})`}
+          label={t('formNotes')}
           value={notes}
           onChange={e => setNotes(e.target.value)}
-          placeholder="Detalls addicionals del préstec…"
+          placeholder={t('formNotesPlaceholder')}
           rows={3}
         />
       </div>

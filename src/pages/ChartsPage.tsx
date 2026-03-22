@@ -111,7 +111,7 @@ export function ChartsPage() {
               <XAxis dataKey="name" tick={{ fontSize: 10 }} />
               <YAxis tick={{ fontSize: 10 }} />
               <Tooltip
-                formatter={(value: number) => [formatCurrency(value), 'Import']}
+                formatter={(value: number) => [formatCurrency(value), t('chartsAmountLabel')]}
                 contentStyle={{ borderRadius: 12, fontSize: 12 }}
               />
               <Bar dataKey="import" fill="#3b91f5" radius={[6, 6, 0, 0]} />
@@ -134,7 +134,7 @@ export function ChartsPage() {
               <Tooltip
                 formatter={(value: number, name: string) => [
                   formatCurrency(value),
-                  name === 'acumulat' ? 'Retornat' : 'Objectiu',
+                  name === 'acumulat' ? t('chartsReturnedLabel') : t('chartsTargetLabel'),
                 ]}
                 contentStyle={{ borderRadius: 12, fontSize: 12 }}
               />
@@ -145,7 +145,7 @@ export function ChartsPage() {
                 stroke="#10b981"
                 strokeWidth={2.5}
                 dot={{ r: 4 }}
-                name="Retornat"
+                name={t('chartsReturnedLabel')}
               />
               <Line
                 type="monotone"
@@ -154,7 +154,7 @@ export function ChartsPage() {
                 strokeWidth={1.5}
                 strokeDasharray="8 4"
                 dot={false}
-                name="Objectiu"
+                name={t('chartsTargetLabel')}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -174,7 +174,7 @@ export function ChartsPage() {
                 <XAxis dataKey="name" tick={{ fontSize: 10 }} />
                 <YAxis tick={{ fontSize: 10 }} />
                 <Tooltip
-                  formatter={(value: number) => [formatCurrency(value), 'Total mes']}
+                  formatter={(value: number) => [formatCurrency(value), t('chartsMonthLabel')]}
                   contentStyle={{ borderRadius: 12, fontSize: 12 }}
                 />
                 <Bar dataKey="total" fill="#8b5cf6" radius={[6, 6, 0, 0]} />
@@ -207,7 +207,7 @@ export function ChartsPage() {
                 ))}
               </Pie>
               <Tooltip
-                formatter={(value: number) => [formatCurrency(value), 'Total']}
+                formatter={(value: number) => [formatCurrency(value), t('chartsTotalLabel')]}
                 contentStyle={{ borderRadius: 12, fontSize: 12 }}
               />
             </PieChart>

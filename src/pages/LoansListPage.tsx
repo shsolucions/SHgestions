@@ -56,7 +56,7 @@ export function LoansListPage() {
   }, [loadLoans]);
 
   if (loading) {
-    return <LoadingSpinner text="Carregant préstecs…" />;
+    return <LoadingSpinner text={t('loadingLoans')} />;
   }
 
   return (
@@ -177,10 +177,10 @@ export function LoansListPage() {
                 {/* Footer */}
                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-surface-100 dark:border-surface-700">
                   <span className="text-xs text-surface-400">
-                    Inici: {formatDate(loan.startDate)}
+                    {t('loansStart')}: {formatDate(loan.startDate)}
                   </span>
                   <span className="text-xs text-surface-400">
-                    {info.count} moviment{info.count !== 1 ? 's' : ''}
+                    {info.count} {info.count !== 1 ? t('loansMovements') : t('loansMovement')}
                   </span>
                 </div>
               </Card>

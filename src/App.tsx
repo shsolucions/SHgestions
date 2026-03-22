@@ -18,10 +18,16 @@ import { PaymentDetailPage } from '@/pages/PaymentDetailPage';
 import { CloudSettingsPage } from '@/pages/CloudSettingsPage';
 import { ChartsPage } from '@/pages/ChartsPage';
 import { LanguageSettingsPage } from '@/pages/LanguageSettingsPage';
+import { OAuthCallbackPage } from '@/pages/OAuthCallbackPage';
 import { LoadingSpinner } from '@/components/ui/EmptyState';
 
 function AppRoutes() {
   const { isLoggedIn, loading } = useAuth();
+
+  // OAuth callback - always accessible (popup redirect)
+  if (window.location.pathname === '/oauth-callback') {
+    return <OAuthCallbackPage />;
+  }
 
   if (loading) {
     return (

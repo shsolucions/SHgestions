@@ -63,7 +63,7 @@ export function LoanDashboardPage() {
     }
   };
 
-  if (loading) return <LoadingSpinner text="Carregant dashboard…" />;
+  if (loading) return <LoadingSpinner text={t('loadingDashboard')} />;
   if (!loan) {
     return (
       <div className="text-center py-12">

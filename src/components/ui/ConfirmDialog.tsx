@@ -20,7 +20,7 @@ export function ConfirmDialog({
   title,
   message,
   confirmText = 'Confirmar',
-  cancelText = 'Cancel·lar',
+  cancelText = 'Cancel',
   variant = 'danger',
 }: ConfirmDialogProps) {
   return (

@@ -36,20 +36,20 @@ class CloudService {
       {
         name: 'google-drive',
         displayName: 'Google Drive',
-        icon: '🔵',
+        icon: 'google-drive',
         available: true,
       },
       {
         name: 'dropbox',
         displayName: 'Dropbox',
-        icon: '🔷',
-        available: false, // Stub
+        icon: 'dropbox',
+        available: true,
       },
       {
         name: 'onedrive',
         displayName: 'OneDrive',
-        icon: '☁️',
-        available: false, // Stub
+        icon: 'onedrive',
+        available: true,
       },
     ];
   }

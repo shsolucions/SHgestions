@@ -203,13 +203,13 @@ export function ReviewPaymentPage() {
 
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label="Data"
+            label={t('formDate')}
             type="date"
             value={paymentDate}
             onChange={e => setPaymentDate(e.target.value)}
           />
           <Input
-            label="Hora"
+            label={t('formTime')}
             type="time"
             value={paymentTime}
             onChange={e => setPaymentTime(e.target.value)}
@@ -218,7 +218,7 @@ export function ReviewPaymentPage() {
 
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label="Import"
+            label={t('formAmount')}
             type="number"
             inputMode="decimal"
             step="0.01"
@@ -228,7 +228,7 @@ export function ReviewPaymentPage() {
             placeholder="0,00"
           />
           <Select
-            label="Moneda"
+            label={t('formCurrency')}
             value={currency}
             onChange={e => setCurrency(e.target.value)}
             options={[
@@ -240,66 +240,66 @@ export function ReviewPaymentPage() {
         </div>
 
         <Select
-          label="Mètode de pagament"
+          label={t('formPaymentMethod')}
           value={paymentMethod}
           onChange={e => setPaymentMethod(e.target.value as PaymentMethod)}
           options={[
-            { value: 'efectiu', label: 'Efectiu' },
-            { value: 'transferència', label: 'Transferència' },
-            { value: 'bizum', label: 'Bizum' },
-            { value: 'ingrés', label: 'Ingrés bancari' },
-            { value: 'altre', label: 'Altre' },
+            { value: 'efectiu', label: t('methodCash') },
+            { value: 'transferència', label: t('methodTransfer') },
+            { value: 'bizum', label: t('methodBizum') },
+            { value: 'ingrés', label: t('methodDeposit') },
+            { value: 'altre', label: t('methodOther') },
           ]}
         />
 
         <Input
-          label="Ordenant / Emissor"
+          label={t('formSender')}
           value={senderName}
           onChange={e => setSenderName(e.target.value)}
-          placeholder="Nom de qui fa el pagament"
+          placeholder={t('formSenderPlaceholder')}
         />
 
         <Input
-          label="Concepte"
+          label={t('formConcept')}
           value={concept}
           onChange={e => setConcept(e.target.value)}
-          placeholder="Concepte del moviment"
+          placeholder={t('formConceptPlaceholder')}
         />
 
         <Input
-          label="Banc"
+          label={t('formBank')}
           value={bankName}
           onChange={e => setBankName(e.target.value)}
-          placeholder="Nom del banc"
+          placeholder={t('formBankPlaceholder')}
         />
 
         <Input
-          label="IBAN (parcial)"
+          label={t('formIban')}
           value={ibanMasked}
           onChange={e => setIbanMasked(e.target.value)}
-          placeholder="ES12 **** **** 4567"
+          placeholder={t('formIbanPlaceholder')}
         />
 
         <div className="grid grid-cols-2 gap-3">
           <Input
-            label="Codi operació"
+            label={t('formOpCode')}
             value={operationCode}
             onChange={e => setOperationCode(e.target.value)}
-            placeholder="OP-XXXX"
+            placeholder={t('formOpCodePlaceholder')}
           />
           <Input
-            label="Referència"
+            label={t('formRef')}
             value={referenceCode}
             onChange={e => setReferenceCode(e.target.value)}
-            placeholder="REF-XXXX"
+            placeholder={t('formRefPlaceholder')}
           />
         </div>
 
         <TextArea
-          label="Notes (opcional)"
+          label={t('formNotesPayment')}
           value={notes}
           onChange={e => setNotes(e.target.value)}
-          placeholder="Notes addicionals…"
+          placeholder={t('formNotesPaymentPlaceholder')}
           rows={2}
         />
       </div>

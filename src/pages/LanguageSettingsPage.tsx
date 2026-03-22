@@ -6,10 +6,26 @@ import type { LanguageCode } from '@/i18n/translations';
 import { Card } from '@/components/ui/Card';
 import { useToast } from '@/context/ToastContext';
 
-const FLAGS: Record<LanguageCode, string> = {
-  ca: '🏴󠁥󠁳󠁣󠁴󠁿', es: '🇪🇸', en: '🇬🇧', fr: '🇫🇷',
-  de: '🇩🇪', it: '🇮🇹', pt: '🇵🇹', nl: '🇳🇱', ar: '🇸🇦',
-};
+function FlagIcon({ code }: { code: LanguageCode }) {
+  if (code === 'ca') {
+    return (
+      <svg width="28" height="20" viewBox="0 0 28 20" className="rounded-sm">
+        <rect width="28" height="20" fill="#FCDD09"/>
+        <rect y="2.2" width="28" height="2.2" fill="#DA121A"/>
+        <rect y="6.6" width="28" height="2.2" fill="#DA121A"/>
+        <rect y="11" width="28" height="2.2" fill="#DA121A"/>
+        <rect y="15.4" width="28" height="2.2" fill="#DA121A"/>
+        <rect width="12" height="10" fill="#003DA5"/>
+        <polygon points="6,2 7.2,5.2 10.5,5.2 7.8,7.2 8.8,10.4 6,8.2 3.2,10.4 4.2,7.2 1.5,5.2 4.8,5.2" fill="#DA121A"/>
+      </svg>
+    );
+  }
+  const flags: Record<string, string> = {
+    es: '🇪🇸', en: '🇬🇧', fr: '🇫🇷', de: '🇩🇪',
+    it: '🇮🇹', pt: '🇵🇹', nl: '🇳🇱', ar: '🇸🇦',
+  };
+  return <span className="text-2xl">{flags[code] || '🏳️'}</span>;
+}
 
 export function LanguageSettingsPage() {
   const { lang, setLang, t } = useLanguage();
@@ -41,7 +57,7 @@ export function LanguageSettingsPage() {
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl">{FLAGS[language.code]}</span>
+                  <FlagIcon code={language.code} />
                   <div>
                     <p className="text-sm font-semibold text-surface-900 dark:text-surface-100">
                       {language.nativeName}

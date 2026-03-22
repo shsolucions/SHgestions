@@ -121,7 +121,7 @@ export function PaymentDetailPage() {
     }
   };
 
-  if (loading) return <LoadingSpinner text="Carregant detall…" />;
+  if (loading) return <LoadingSpinner text={t('loadingDetail')} />;
   if (!payment) {
     return (
       <div className="text-center py-12">
@@ -141,13 +141,13 @@ export function PaymentDetailPage() {
         <div className="bg-white dark:bg-surface-800 rounded-2xl border border-surface-200 dark:border-surface-700 p-5 space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <Input
-              label="Data"
+              label={t('formDate')}
               type="date"
               value={editData.paymentDate || ''}
               onChange={e => setEditData(prev => ({ ...prev, paymentDate: e.target.value }))}
             />
             <Input
-              label="Hora"
+              label={t('formTime')}
               type="time"
               value={editData.paymentTime || ''}
               onChange={e => setEditData(prev => ({ ...prev, paymentTime: e.target.value }))}
@@ -155,7 +155,7 @@ export function PaymentDetailPage() {
           </div>
           <div className="grid grid-cols-2 gap-3">
             <Input
-              label="Import"
+              label={t('formAmount')}
               type="number"
               inputMode="decimal"
               step="0.01"
@@ -163,7 +163,7 @@ export function PaymentDetailPage() {
               onChange={e => setEditData(prev => ({ ...prev, amount: parseFloat(e.target.value) || 0 }))}
             />
             <Select
-              label="Moneda"
+              label={t('formCurrency')}
               value={editData.currency || 'EUR'}
               onChange={e => setEditData(prev => ({ ...prev, currency: e.target.value }))}
               options={[
@@ -174,61 +174,61 @@ export function PaymentDetailPage() {
             />
           </div>
           <Select
-            label="Mètode"
+            label={t('formPaymentMethod')}
             value={editData.paymentMethod || 'ingrés'}
             onChange={e => setEditData(prev => ({ ...prev, paymentMethod: e.target.value as PaymentMethod }))}
             options={[
-              { value: 'efectiu', label: 'Efectiu' },
-              { value: 'transferència', label: 'Transferència' },
-              { value: 'bizum', label: 'Bizum' },
-              { value: 'ingrés', label: 'Ingrés bancari' },
-              { value: 'altre', label: 'Altre' },
+              { value: 'efectiu', label: t('methodCash') },
+              { value: 'transferència', label: t('methodTransfer') },
+              { value: 'bizum', label: t('methodBizum') },
+              { value: 'ingrés', label: t('methodDeposit') },
+              { value: 'altre', label: t('methodOther') },
             ]}
           />
           <Select
-            label="Estat"
+            label={t('formStatus')}
             value={editData.reviewStatus || 'pendent'}
             onChange={e => setEditData(prev => ({ ...prev, reviewStatus: e.target.value as ReviewStatus }))}
             options={[
-              { value: 'pendent', label: 'Pendent' },
-              { value: 'revisat', label: 'Revisat' },
-              { value: 'rebutjat', label: 'Rebutjat' },
+              { value: 'pendent', label: t('statusPending') },
+              { value: 'revisat', label: t('statusReviewed') },
+              { value: 'rebutjat', label: t('statusRejected') },
             ]}
           />
           <Input
-            label="Ordenant"
+            label={t('detailSender')}
             value={editData.senderName || ''}
             onChange={e => setEditData(prev => ({ ...prev, senderName: e.target.value }))}
           />
           <Input
-            label="Concepte"
+            label={t('detailConcept')}
             value={editData.concept || ''}
             onChange={e => setEditData(prev => ({ ...prev, concept: e.target.value }))}
           />
           <Input
-            label="Banc"
+            label={t('detailBank')}
             value={editData.bankName || ''}
             onChange={e => setEditData(prev => ({ ...prev, bankName: e.target.value }))}
           />
           <Input
-            label="IBAN"
+            label={t('detailIban')}
             value={editData.ibanMasked || ''}
             onChange={e => setEditData(prev => ({ ...prev, ibanMasked: e.target.value }))}
           />
           <div className="grid grid-cols-2 gap-3">
             <Input
-              label="Codi operació"
+              label={t('detailOpCode')}
               value={editData.operationCode || ''}
               onChange={e => setEditData(prev => ({ ...prev, operationCode: e.target.value }))}
             />
             <Input
-              label="Referència"
+              label={t('detailRef')}
               value={editData.referenceCode || ''}
               onChange={e => setEditData(prev => ({ ...prev, referenceCode: e.target.value }))}
             />
           </div>
           <TextArea
-            label="Notes"
+            label={t('detailNotes')}
             value={editData.notes || ''}
             onChange={e => setEditData(prev => ({ ...prev, notes: e.target.value }))}
             rows={2}
@@ -300,13 +300,13 @@ export function PaymentDetailPage() {
       <Card className="p-4 space-y-3">
         <p className="text-xs font-semibold text-surface-400 uppercase tracking-wider">{t('details')}</p>
 
-        <DetailRow label="Ordenant" value={payment.senderName} />
-        <DetailRow label="Concepte" value={payment.concept} />
-        <DetailRow label="Banc" value={payment.bankName} />
-        <DetailRow label="IBAN" value={payment.ibanMasked} mono />
-        <DetailRow label="Codi operació" value={payment.operationCode} mono />
-        <DetailRow label="Referència" value={payment.referenceCode} mono />
-        {payment.notes && <DetailRow label="Notes" value={payment.notes} />}
+        <DetailRow label={t('detailSender')} value={payment.senderName} />
+        <DetailRow label={t('detailConcept')} value={payment.concept} />
+        <DetailRow label={t('detailBank')} value={payment.bankName} />
+        <DetailRow label={t('detailIban')} value={payment.ibanMasked} mono />
+        <DetailRow label={t('detailOpCode')} value={payment.operationCode} mono />
+        <DetailRow label={t('detailRef')} value={payment.referenceCode} mono />
+        {payment.notes && <DetailRow label={t('detailNotes')} value={payment.notes} />}
 
         {/* OCR info */}
         {payment.ocrRawText && (
