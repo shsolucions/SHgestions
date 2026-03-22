@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/i18n';
 import { LANGUAGES } from '@/i18n/translations';
 import type { LanguageCode } from '@/i18n/translations';
 import { Card } from '@/components/ui/Card';
 import { useToast } from '@/context/ToastContext';
-import { useTranslation } from '@/i18n';
 
 const FLAGS: Record<LanguageCode, string> = {
   ca: '🏴󠁥󠁳󠁣󠁴󠁿', es: '🇪🇸', en: '🇬🇧', fr: '🇫🇷',
@@ -11,13 +12,16 @@ const FLAGS: Record<LanguageCode, string> = {
 };
 
 export function LanguageSettingsPage() {
-  const { lang, setLang, t } = useTranslation();
+  const { lang, setLang, t } = useLanguage();
   const { addToast } = useToast();
+  const navigate = useNavigate();
 
   const handleSelect = (code: LanguageCode) => {
     setLang(code);
     const selected = LANGUAGES.find(l => l.code === code);
     addToast('success', `${selected?.nativeName || code} ✓`);
+    // Tornar al menú principal després de seleccionar
+    setTimeout(() => navigate('/loans'), 400);
   };
 
   return (

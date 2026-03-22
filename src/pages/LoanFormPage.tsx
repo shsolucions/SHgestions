@@ -23,7 +23,7 @@ export function LoanFormPage() {
   const [loading, setLoading] = useState(isEdit);
   const [saving, setSaving] = useState(false);
 
-  const [name, setName] = useState('PRÉSTEC BYD');
+  const [name, setName] = useState('PRÉSTEC PERSONAL');
   const [lenderName, setLenderName] = useState('');
   const [borrowerName, setBorrowerName] = useState('');
   const [principalAmount, setPrincipalAmount] = useState('1000');
@@ -110,7 +110,7 @@ export function LoanFormPage() {
           label="Nom del préstec"
           value={name}
           onChange={e => setName(e.target.value)}
-          placeholder="p.ex. PRÉSTEC BYD"
+          placeholder="p.ex. PRÉSTEC PERSONAL"
         />
 
         <div className="grid grid-cols-2 gap-3">

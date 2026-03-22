@@ -16,7 +16,7 @@ export async function seedDemoData(): Promise<void> {
     {
       id: loanId1,
       userId: adminUser.id,
-      name: 'PRÉSTEC BYD',
+      name: 'PRÉSTEC PERSONAL',
       lenderName: 'Joan Garcia',
       borrowerName: 'Said Hammouda',
       principalAmount: 10000,

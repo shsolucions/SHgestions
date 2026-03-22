@@ -87,7 +87,7 @@ const ca = {
   loanFormTitleNew: 'Nou préstec',
   loanFormTitleEdit: 'Editar préstec',
   loanFormName: 'Nom del préstec',
-  loanFormNamePlaceholder: 'p.ex. PRÉSTEC BYD',
+  loanFormNamePlaceholder: 'p.ex. PRÉSTEC PERSONAL',
   loanFormLender: 'Prestador (qui presta)',
   loanFormLenderPlaceholder: 'Nom del prestador',
   loanFormBorrower: 'Prestatari (qui rep)',
@@ -344,6 +344,9 @@ const ca = {
   settings: 'Configuració',
 
   deleteLoanConfirm: 'S\'eliminaran el préstec "{name}" i tots els seus registres. Aquesta acció no es pot desfer.',
+  usernameExists: "Aquest nom d'usuari ja existeix.",
+  pinMustBe4: 'El PIN ha de ser de 4 dígits numèrics.',
+  usernameMin: "L'usuari ha de tenir almenys 3 caràcters.",
   // ── Alias keys (used by pages) ──
   addAtLeastOneImage: 'Afegeix almenys una imatge',
   addRecord: 'Afegir registre',

@@ -27,7 +27,7 @@ export function RegisterPage() {
     try {
       const result = await register(username.trim(), displayName.trim(), pin);
       if (result.success) { addToast('success', t('registerSuccess')); }
-      else { setError(result.error || t('registerErrorGeneric')); }
+      else { setError(t(result.error || 'registerErrorGeneric')); }
     } catch { setError(t('registerErrorGeneric')); } finally { setLoading(false); }
   };
 
