@@ -4,8 +4,8 @@
   "description": "Gestió de préstecs personals i familiars",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#1d5dd7",
+  "background_color": "#D4AF37",
+  "theme_color": "#D4AF37",
   "orientation": "portrait-primary",
   "icons": [
     {
