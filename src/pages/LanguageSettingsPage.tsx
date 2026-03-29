@@ -15,8 +15,8 @@ function FlagIcon({ code }: { code: LanguageCode }) {
         <rect y="6.6" width="28" height="2.2" fill="#DA121A"/>
         <rect y="11" width="28" height="2.2" fill="#DA121A"/>
         <rect y="15.4" width="28" height="2.2" fill="#DA121A"/>
-        <rect width="12" height="10" fill="#003DA5"/>
-        <polygon points="6,2 7.2,5.2 10.5,5.2 7.8,7.2 8.8,10.4 6,8.2 3.2,10.4 4.2,7.2 1.5,5.2 4.8,5.2" fill="#DA121A"/>
+        <polygon points="0,0 12,10 0,20" fill="#FCDD09"/>
+        <polygon points="6,3.5 7,6.2 9.8,6.2 7.5,8 8.3,10.7 6,8.8 3.7,10.7 4.5,8 2.2,6.2 5,6.2" fill="#DA121A"/>
       </svg>
     );
   }
